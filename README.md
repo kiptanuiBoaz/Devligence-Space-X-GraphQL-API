@@ -1,32 +1,52 @@
-# React + TypeScript + Vite
+API:
+This test will require you to use the public Space X GraphQL API. The following link provides access to the base api endpoint, schema and graphql explorer.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GraphQL queries to use:
+Company
+Launches
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Specifications
+Display the company details (i.e name, summary and hq ) at the top.Also Add the company management (CEO, COO & CTO) and extra info (i.e launch sites, vehicles and test sites).
 
-## Expanding the ESLint configuration
+Below company details display a table which should list the launches paginated with options for 5 and 10 items per page selected by the user in the very bottom of the table with two buttons for next (>) and previous (<) page and one dropdown to select the 5 or 10 item limit.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The user should also be able to filter and sort the results by launch date or by rocket name.
 
-- Configure the top-level `parserOptions` property like this:
+The information shown in the table should have the following columns:
+Id
+Mission Name
+Rocket Name
+Launch Site
+Launch Success
+Launch Date
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Style
+Date should follow the following format 23 Feb 2022.
+Show different color states depending on launch success.
+Feel free to use icons for certain info.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# Devligence-Space-X-GraphQL-API
-# Devligence-Space-X-GraphQL-API
+
+
+
+
+Functionality
+
+1. The mission name should be a link leading to another page where the user should have a prefilled form with all the fields and a button to submit any changes for the specific item. There should be also a close button to go back if the user does not want to make any changes as well as a delete button to delete the item.
+2. In the home page it should be also a add new launch button that leads to the same form as above but with all the form fields empty.
+3. A dark mode toggle should switch background and text color.
+4. In order for the user to have access to the application, a "token" should exist in cookies or local storage. If there is no "token" a login screen prompts the user to click a button that stores a "token". Also a logout button should displayed in the home page.
+
+Git
+
+To start developing, create a git repository and add these instructions as Readme.md in the main branch. Then start developing the application in another branch.
+
+Deployment
+
+Deploy your app to any free platform e.g (netlify, vercel) and share the link together with github repo in your submission.
+
+
+Tech Stack
+
+The above app needs to be implemented using ReactJS. The choices of frameworks, starters and libraries are up to you.
+
