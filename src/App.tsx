@@ -2,10 +2,18 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { FILMS_QUERY } from './graphql/query';
+import { useQuery } from '@apollo/client';
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  //from graphql query
+  const { data, loading, error } = useQuery(FILMS_QUERY);
+  console.log(data, "data")
+  console.log(loading, "loading")
+  console.log(error, "error")
+  if (loading) return "Loading...";
+  if (error) return <pre>{error.message}</pre>
 
   return (
     <>
@@ -17,18 +25,15 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>SpaceX Launches</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <ul>
+          {data.launchesPast.map((launch) => (
+            <li key={launch.id}>{launch.mission_name}</li>
+          ))}
+        </ul>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
     </>
   )
 }
