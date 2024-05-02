@@ -1,52 +1,65 @@
-API:
-This test will require you to use the public Space X GraphQL API. The following link provides access to the base api endpoint, schema and graphql explorer.
+# SpaceX Launch Dashboard
 
-GraphQL queries to use:
-Company
-Launches
+This is a web application that provides information about SpaceX launches using the SpaceX GraphQL API. Users can view company details, list launches, filter and sort launches, and perform various other actions related to launches.
 
+## API
 
-Specifications
-Display the company details (i.e name, summary and hq ) at the top.Also Add the company management (CEO, COO & CTO) and extra info (i.e launch sites, vehicles and test sites).
+The application uses the public SpaceX GraphQL API. The base API endpoint, schema, and GraphQL explorer can be accessed [here](https://api.spacex.land/graphql/).
 
-Below company details display a table which should list the launches paginated with options for 5 and 10 items per page selected by the user in the very bottom of the table with two buttons for next (>) and previous (<) page and one dropdown to select the 5 or 10 item limit.
+### GraphQL Queries Used
 
-The user should also be able to filter and sort the results by launch date or by rocket name.
+- Company
+- Launches
 
-The information shown in the table should have the following columns:
-Id
-Mission Name
-Rocket Name
-Launch Site
-Launch Success
-Launch Date
+## Specifications
 
-Style
-Date should follow the following format 23 Feb 2022.
-Show different color states depending on launch success.
-Feel free to use icons for certain info.
+### Company Details
 
+The company details, including name, summary, headquarters, CEO, COO, CTO, launch sites, vehicles, and test sites, are displayed at the top of the page.
 
+### Launches Table
 
+Below the company details, a table is displayed listing the launches. The table is paginated with options for 5 and 10 items per page. Users can navigate between pages using next and previous buttons and can select the item limit from a dropdown.
 
+#### Launch Table Columns
 
-Functionality
+- Id
+- Mission Name (linked to launch details page)
+- Rocket Name
+- Launch Site
+- Launch Success (with different color states)
+- Launch Date (formatted as DD MMM YYYY)
 
-1. The mission name should be a link leading to another page where the user should have a prefilled form with all the fields and a button to submit any changes for the specific item. There should be also a close button to go back if the user does not want to make any changes as well as a delete button to delete the item.
-2. In the home page it should be also a add new launch button that leads to the same form as above but with all the form fields empty.
-3. A dark mode toggle should switch background and text color.
-4. In order for the user to have access to the application, a "token" should exist in cookies or local storage. If there is no "token" a login screen prompts the user to click a button that stores a "token". Also a logout button should displayed in the home page.
+### Functionality
 
-Git
+1. **Mission Name Link**: Clicking on the mission name in the launch table leads to a prefilled form with all the fields for that launch. Users can submit changes, close the form, or delete the item.
 
-To start developing, create a git repository and add these instructions as Readme.md in the main branch. Then start developing the application in another branch.
+2. **Add New Launch Button**: On the home page, there is a button to add a new launch. Clicking this button leads to a form with empty fields.
 
-Deployment
+3. **Dark Mode Toggle**: Toggles between dark and light themes, changing background and text colors.
 
-Deploy your app to any free platform e.g (netlify, vercel) and share the link together with github repo in your submission.
+4. **Authentication**: Users must have a "token" stored in cookies or local storage to access the application. If no token exists, a login prompt appears with a button to store a token. A logout button is also available on the home page.
 
+## Tech Stack
 
-Tech Stack
+- ReactJS
+- TypeScript
+- React Router
+- Redux
 
-The above app needs to be implemented using ReactJS. The choices of frameworks, starters and libraries are up to you.
+## Deployment
 
+The application is deployed to [platform_name](#). The source code can be found on [GitHub](#).
+
+## Development
+
+To start developing, clone the git repository and switch to a new branch. The main branch contains this README.md file with instructions.
+
+## Getting Started
+
+To run the application locally, follow these steps:
+
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Run the development server using `npm start`.
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
