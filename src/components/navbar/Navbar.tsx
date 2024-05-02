@@ -7,7 +7,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai"
 import { useState } from 'react';
 import { RESET_USER, selectTheme } from '../../redux/authSlice';
-import { RESET_LAUNCH, UPDATE_EDITING_ID, selectEditingId } from '../../redux/lauchSlice';
+import { RESET_LAUNCH, UPDATE_EDITING_ID } from '../../redux/lauchSlice';
 
 export const Navbar = () => {
     const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
@@ -15,8 +15,8 @@ export const Navbar = () => {
 
     //redux store states
     const theme = useSelector(selectTheme);
-    const editingId = useSelector(selectEditingId);
-    console.log(editingId)
+
+
     //navigation fns
     const navigate = useNavigate();
     const dispatch = useDispatch();

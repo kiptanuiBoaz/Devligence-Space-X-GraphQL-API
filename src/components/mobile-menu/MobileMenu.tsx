@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ActionBtn, DangerBtn, ThemeSelector } from '..';
 import "./mobile-menu.scss";
-import { UPDATE_EDITING_ID } from '../../redux/lauchSlice';
+import { RESET_LAUNCH, UPDATE_EDITING_ID } from '../../redux/lauchSlice';
 
 export const MobileMenu = () => {
     const navigate = useNavigate();
@@ -20,16 +20,21 @@ export const MobileMenu = () => {
     const location = useLocation();
 
 
-    //handle click event
     const handleClick = () => {
-        dispatch(UPDATE_EDITING_ID("add"))
-        navigate(location.pathname === "/edit" ? "/" : "/edit");
+        dispatch(RESET_LAUNCH());
+        if (location.pathname === "/") {
+            dispatch(UPDATE_EDITING_ID("add"));
+            navigate("/edit");
+        } else {
+            navigate("/");
+        }
     }
+
 
     return (
         <div className='menu-items'>
             <ThemeSelector />
-            <ActionBtn clickHandler={handleClick}>  {location.pathname !== "/edit" ? "Add New Joke" : "Back to Jokes"}</ActionBtn>
+            <ActionBtn clickHandler={handleClick}>  {location.pathname !== "/edit" ? "Add New Launch" : "Back to Launches"}</ActionBtn>
             <DangerBtn clickHandler={logOut}>Logout</DangerBtn>
         </div>
     )

@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { TOGGLE_THEME, selectTheme } from "../../redux/themeSlice";
 
 export const ThemeSelector = () => {
-    //local reactive state
-    const [dark, setDark] = useState(true);
     //global theme refrence
     const theme = useSelector(selectTheme);
+    //local reactive state
+    const [dark, setDark] = useState(theme === "dark");
 
     const dispatch = useDispatch();
 

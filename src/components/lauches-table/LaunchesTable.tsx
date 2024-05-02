@@ -65,8 +65,9 @@ export const LaunchesTable = ({ launches }: LaunchesTablePropInterface) => {
                         <td>{launch_site?.site_name ?? "N/A"}</td>
                     </tr>
                 ))}
-                {launches.length === 0 && <p style={{ color: "tomato" }}>Sorry! No lauches match your filter </p>}
+
             </tbody>
+            {launches.length === 0 && <p style={{ color: "tomato" }}>Sorry! No lauches match your filter </p>}
         </table>
     )
 }

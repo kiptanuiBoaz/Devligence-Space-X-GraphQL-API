@@ -2,10 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ThemeInterface } from '../types/types';
 
 // Determine the initial theme based on system preferences
-// const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const prefersDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const storedTheme = JSON.parse(localStorage.getItem('theme') as string);
+let initialTheme = prefersDarkTheme ? 'dark' : 'light'; // Set initial theme based on system preference
+
+if (storedTheme && storedTheme.theme) {
+    initialTheme = storedTheme.theme; // If theme is stored in local storage, override with stored theme
+}
+
 const initialState: ThemeInterface = {
-    theme: storedTheme ? storedTheme.theme : "light"
+    theme: initialTheme,
 };
 
 // Managing theme
