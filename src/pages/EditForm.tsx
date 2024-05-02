@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./edit-form.scss";
 import { useNavigate } from "react-router-dom";
 import { Confirm, Notify } from "notiflix";
-import { RESET_LAUNCH, selectEditingId, selectLaunch, UPDATE_LAUNCH } from "../redux/dataSlice";
+import { RESET_LAUNCH, selectEditingId, selectLaunch, UPDATE_LAUNCH } from "../redux/lauchSlice";
 
 const EditForm = () => {
     const existingLaunch = useSelector(selectLaunch);

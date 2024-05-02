@@ -16,6 +16,7 @@ export const Pagination: React.FC = () => {
     const totalPages = Math.ceil(30 / limit);
     //page numbers to display
     const pageNumbers = Array.from({ length: pagesToShow }, (_, index) => currentPage - 1 + index);
+
     return (
         <div className="pagination">
             <ItemsPerPage />

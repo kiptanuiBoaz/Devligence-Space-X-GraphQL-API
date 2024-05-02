@@ -1,22 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LaunchStateInterface } from '../types/launches.types';
 
+// Load state from local storage if available
+const storedState = localStorage.getItem('launch');
+let initialState: LaunchStateInterface;
 
-const initialState: LaunchStateInterface = {
-    launch: {
-        id: "",
-        mission_name: "",
-        rocket: {
-            rocket_name: ""
+if (storedState) {
+    initialState = JSON.parse(storedState);
+} else {
+    initialState = {
+        launch: {
+            id: "",
+            mission_name: "",
+            rocket: {
+                rocket_name: ""
+            },
+            launch_site: {
+                site_name: ""
+            },
+            launch_success: undefined,
+            launch_date_local: undefined,
         },
-        launch_site: {
-            site_name: ""
-        },
-        launch_success: undefined,
-        launch_date_local: undefined,
-    },
-    editingId: "add",
-};
+        editingId: "add",
+    };
+}
 
 const launchSlice = createSlice({
     name: "launch",
@@ -26,17 +33,18 @@ const launchSlice = createSlice({
             const { launch, editingId } = action.payload;
             state.editingId = editingId;
             state.launch = launch;
+            localStorage.setItem('launchState', JSON.stringify(state)); // Update local storage
         },
         RESET_LAUNCH: (state) => {
             state.editingId = initialState.editingId;
             state.launch = initialState.launch;
+            localStorage.removeItem('launchState'); // Clear local storage
         },
         UPDATE_EDITING_ID: (state, action: PayloadAction<LaunchStateInterface["editingId"]>) => {
             state.editingId = action.payload;
+            localStorage.setItem('launchState', JSON.stringify(state)); // Update local storage
         }
-
     }
-
 });
 
 export const { UPDATE_LAUNCH, UPDATE_EDITING_ID, RESET_LAUNCH } = launchSlice.actions;

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import themeSlice from '../redux/themeSlice';
 import authSlice from '../redux/authSlice';
-import launchSlice from '../redux/dataSlice';
+import launchSlice from '../redux/lauchSlice';
 import paginationSlice from '../redux/paginationSlice';
 
 

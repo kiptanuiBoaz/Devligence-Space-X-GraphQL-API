@@ -7,7 +7,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai"
 import { useState } from 'react';
 import { RESET_USER, selectTheme } from '../../redux/authSlice';
-import { UPDATE_EDITING_ID } from '../../redux/dataSlice';
+import { UPDATE_EDITING_ID } from '../../redux/lauchSlice';
 
 export const Navbar = () => {
     const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export const Navbar = () => {
             <div className={`nav-items ${showMobileNav && "mobile-nav"}`}>
 
                 <div className="link-container">
-                    <ActionBtn clickHandler={handleClick}>  {location.pathname !== "/edit" ? "Add New Joke" : "Back to Jokes"}</ActionBtn>
+                    <ActionBtn clickHandler={handleClick}>  {location.pathname !== "/edit" ? "Add New Launch" : "Back to Launches"}</ActionBtn>
                     <DangerBtn clickHandler={logOut}>Logout</DangerBtn>
                 </div>
                 <Theme />

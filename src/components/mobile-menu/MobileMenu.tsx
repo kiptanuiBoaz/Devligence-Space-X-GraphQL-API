@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ActionBtn, DangerBtn, Theme } from '..';
 import "./mobile-menu.scss";
-import { UPDATE_EDITING_ID } from '../../redux/dataSlice';
+import { UPDATE_EDITING_ID } from '../../redux/lauchSlice';
 
 export const MobileMenu = () => {
     const navigate = useNavigate();

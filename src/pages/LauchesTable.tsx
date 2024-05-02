@@ -2,25 +2,24 @@ import './lauches-table.scss';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux"
 import { Pagination, Spinner } from '../components';
-import { PagenationInterface } from '../types/types';
 import { useNavigate } from 'react-router-dom';
 import { selectTheme } from '../redux/themeSlice';
-import { selectPagination } from '../redux/paginationSlice';
-import { UPDATE_LAUNCH } from '../redux/dataSlice';
+import { UPDATE_LAUNCH } from '../redux/lauchSlice';
 import { modifyText } from '../utils/shortText';
 import { dateFnsFormat } from '../utils/resolveDate';
 import { resolveColor } from '../utils/resolveColor';
-import { useQuery } from '@apollo/client';
-import { Company_And_Launches_Query } from '../graphql/query';
 import { Launch } from '../types/launches.types';
 import CompanyDetails from '../components/company-details/CompanyDetails';
+import { CompanyAndLaunchesQuery } from '../graphql/query';
+import { selectPagination } from '../redux/paginationSlice';
+import { PagenationInterface } from '../types/types';
 
 //feth data as soon as component mounts
-const JokesTable = () => {
+const LaunchesTable = () => {
     const [deviceWidth, setDeviceWidth] = useState<number>(window.innerWidth);
-    // const [allJokes, setAllJokes] = useState<JokeInterface[]>([]);
+
     //pagination state from redux store
-    const { page, limit }: PagenationInterface = useSelector(selectPagination);
+    const { page: currentPage, limit }: PagenationInterface = useSelector(selectPagination);
     const theme = useSelector(selectTheme);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -33,7 +32,7 @@ const JokesTable = () => {
 
     }, [deviceWidth]);
 
-    const { data, loading, error } = useQuery(Company_And_Launches_Query);
+    const { data, loading, error } = CompanyAndLaunchesQuery();
     //   useEffect(() => {
     //     //get all posts from API
     //     const fetchPosts = async () => {
@@ -84,7 +83,7 @@ const JokesTable = () => {
 
                         {data.launches.map(({ id, mission_name, rocket: { rocket_name }, launch_site, launch_date_local, launch_success }: Launch, i: number) => (
                             <tr key={id}>
-                                <td>{i + 1}</td>
+                                <td>{((currentPage - 1) * limit) + (i + 1)}</td>
                                 <td
                                     className='title'
                                     onClick={() => handleEditing(id)}
@@ -108,4 +107,4 @@ const JokesTable = () => {
     )
 }
 
-export default JokesTable
+export default LaunchesTable;
