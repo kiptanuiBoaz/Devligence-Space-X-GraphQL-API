@@ -1,12 +1,12 @@
-import './jokes-table.scss';
+import './lauches-table.scss';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux"
 import { Pagination, Spinner } from '../components';
-import { JokeInterface, PagenationInterface } from '../types/types';
+import { PagenationInterface } from '../types/types';
 import { useNavigate } from 'react-router-dom';
 import { selectTheme } from '../redux/themeSlice';
 import { selectPagination } from '../redux/paginationSlice';
-import { UPDATE_JOKE } from '../redux/dataSlice';
+import { UPDATE_LAUNCH } from '../redux/dataSlice';
 import { modifyText } from '../utils/shortText';
 import { dateFnsFormat } from '../utils/resolveDate';
 import { resolveColor } from '../utils/resolveColor';
@@ -18,8 +18,7 @@ import CompanyDetails from '../components/company-details/CompanyDetails';
 //feth data as soon as component mounts
 const JokesTable = () => {
     const [deviceWidth, setDeviceWidth] = useState<number>(window.innerWidth);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [allJokes, setAllJokes] = useState<JokeInterface[]>([]);
+    // const [allJokes, setAllJokes] = useState<JokeInterface[]>([]);
     //pagination state from redux store
     const { page, limit }: PagenationInterface = useSelector(selectPagination);
     const theme = useSelector(selectTheme);
@@ -54,20 +53,19 @@ const JokesTable = () => {
     //   }, [limit, page]);
 
     //edit an existing document
-    // const handleEditing = ({ id, title, author, body, createdAt, views }: JokeInterface) => {
-    //     dispatch(UPDATE_JOKE({
-    //         joke: { id, title, author, body, createdAt, views },
-    //         editingId: 'editing',
-    //     }));
-    //     navigate("/edit");
-    // }
+    const handleEditing = (id: string) => {
+        dispatch(UPDATE_LAUNCH({
+            launch: data.launches.find((l: Launch) => l.id === id),
+            editingId: 'editing',
+        }));
+        navigate("/edit");
+    }
 
     console.log(data)
+    if (error) return <p>{error.message}s</p>
     return (loading
         ? <Spinner />
-        :
-        <section className={`table-container ${theme}-table`}>
-
+        : <section className={`table-container ${theme}-table`}>
 
             <div className="data-table">
                 <CompanyDetails company={data.company} />
@@ -84,19 +82,17 @@ const JokesTable = () => {
                     </thead>
                     <tbody>
 
-                        {data.launches.map(({ id, mission_name, rocket: { rocket_name }, launch_site, launch_date_local, launch_success }: Launch, i) => (
+                        {data.launches.map(({ id, mission_name, rocket: { rocket_name }, launch_site, launch_date_local, launch_success }: Launch, i: number) => (
                             <tr key={id}>
                                 <td>{i + 1}</td>
                                 <td
                                     className='title'
-                                // onClick={() => handleEditing({
-                                //   id, title, author, body, createdAt, views
-                                // })}
+                                    onClick={() => handleEditing(id)}
                                 >
                                     {modifyText(deviceWidth, mission_name)}
                                 </td>
                                 <td>{modifyText(deviceWidth, rocket_name)}</td>
-                                <td>{dateFnsFormat(launch_date_local.toString())}</td>
+                                <td>{dateFnsFormat(launch_date_local?.toString() ?? "")}</td>
                                 <td style={{
                                     color: resolveColor(launch_success)
                                 }}>{launch_success ?? "No Info"}</td>

@@ -1,63 +1,41 @@
-import { useState, ChangeEvent } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./edit-form.scss";
 import { useNavigate } from "react-router-dom";
-import { DangerBtn } from "../components/danger-btn/DangerBtn";
-import { ActionBtn } from "../components";
 import { Confirm, Notify } from "notiflix";
-import { RESET_JOKE, selectEditingId, selectJoke } from "../redux/dataSlice";
+import { RESET_LAUNCH, selectEditingId, selectLaunch, UPDATE_LAUNCH } from "../redux/dataSlice";
 
 const EditForm = () => {
-    const existingJoke = useSelector(selectJoke);
+    const existingLaunch = useSelector(selectLaunch);
     const editingId = useSelector(selectEditingId);
-    const [joke, setJoke] = useState({ ...existingJoke });//initial state from redux store
+    const [launch, setLaunch] = useState({ ...existingLaunch });
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    //handle formData change
-    const handleInputChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setJoke((prevJoke) => ({
-            ...prevJoke,
-            [name]: value,
+    const handleInputChange = (e: any) => {
+        const { name, value } = e.target;
+        setLaunch(prevLaunch => ({
+            ...prevLaunch,
+            [name]: value
         }));
     };
 
-
-    const handleSubmit = async () => {
-        //simulating post request
-        // const res = await api({
-        //   method: editingId === "editing" ? "PUT" : "POST",
-        //   url: editingId === "editing" ? `${EDIT_JOKE}/${existingJoke.id}` : ADD_JOKE,
-        //   data: joke
-        // });
-        // console.log(res)
-
-        dispatch(RESET_JOKE());
+    const handleSubmit = () => {
+        dispatch(UPDATE_LAUNCH({ launch, editingId }));
+        dispatch(RESET_LAUNCH());
         navigate("/");
-        Notify.success('Succesfully submitted your joke');
-
+        Notify.success('Successfully submitted your launch');
     };
 
-    //delete joke
-
-    const deleteJoke = async () => {
-        // simulating delete action
-        // const res = await api.delete(`${EDIT_JOKE}/${existingJoke.id}`);
-
-        dispatch(RESET_JOKE());
-        navigate("/");
-        Notify.info('Succesfully deleted joke');
-    }
-
-    //show deleteconfirmation modal
     const handleDelete = () => {
         Confirm.show(
-            'Want to delete this joke?',
-            'This can’t be undone, your joke will be removed permanently',
+            'Want to delete this launch?',
+            'This can’t be undone, your launch will be removed permanently',
             "Proceed",
             'Cancel',
-            () => { deleteJoke() },
+            () => { deleteLaunch() },
             () => { },
             {
                 okButtonBackground: " #097ea5",
@@ -69,53 +47,62 @@ const EditForm = () => {
                 titleFontSize: "18px"
             }
         );
-    }
+    };
+
+    const deleteLaunch = () => {
+        // Simulate delete action
+        // dispatch(DELETE_LAUNCH({ launchId: launch.id }));
+        dispatch(RESET_LAUNCH());
+        navigate("/");
+        Notify.info('Successfully deleted launch');
+    };
 
     return (
         <div className="edit-form">
-            <h2 className="page-title">{joke.title ? 'Edit Joke' : 'Add Joke'}</h2>
-            <form >
-
-                <label
-                    className="title-label"
-                    htmlFor="title">
-                    Title:
-                </label>
-                <br />
+            <h2 className="page-title">{existingLaunch?.mission_name ? 'Edit Launch' : 'Add Launch'}</h2>
+            <form>
+                <label htmlFor="mission_name">Mission Name:</label>
                 <input
-                    className="title-input"
                     type="text"
-                    name="title"
-                    value={joke.title}
+                    id="mission_name"
+                    name="mission_name"
+                    value={launch.mission_name}
                     onChange={handleInputChange}
                     required
                 />
-                <br />
-
-                <label
-                    className="body-label"
-                    htmlFor="body"
-                >
-                    Body:
-                </label>
-                <br />
-                <textarea
-                    className="body-input"
-                    name="body"
-                    rows={6}
-                    cols={5}
-                    value={joke.body}
-                    onChange={(e: ChangeEvent<HTMLTextAreaElement>) => handleInputChange(e)}
-                    required
+                <label htmlFor="rocket_name">Rocket Name:</label>
+                <input
+                    type="text"
+                    id="rocket_name"
+                    name="rocket_name"
+                    value={launch.rocket?.rocket_name ?? ""}
+                    onChange={handleInputChange}
                 />
+                <label htmlFor="site_name">Launch Site Name:</label>
+                <input
+                    type="text"
+                    id="site_name"
+                    name="site_name"
+                    value={launch.launch_site?.site_name ?? ""}
+                    onChange={handleInputChange}
+                />
+                <label htmlFor="launch_success">Launch Success:</label>
+                <select
+                    id="launch_success"
+                    name="launch_success"
+                    value={launch.launch_success?.toString() ?? ""}
+                    onChange={handleInputChange}
+                >
+                    <option value="">Select</option>
+                    <option value="true">Success</option>
+                    <option value="false">Failure</option>
+                </select>
                 <br />
-
-                <ActionBtn clickHandler={handleSubmit}>{editingId === "editing" ? 'Save' : 'Add'}</ActionBtn>
-                {editingId === "editing" && <DangerBtn clickHandler={handleDelete}>Delete</DangerBtn>}
-
+                <button type="button" onClick={handleSubmit}>{editingId === "editing" ? 'Save' : 'Add'}</button>
+                {editingId === "editing" && <button type="button" onClick={handleDelete}>Delete</button>}
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default EditForm
+export default EditForm;

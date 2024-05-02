@@ -1,0 +1,28 @@
+.company-details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.company-info {
+  width: 60%;
+  margin-right: 20px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 0px;
+  }
+}
+
+.company-management {
+  // Leave as is, no specific styling
+}
+
+.extra-info {
+  // Leave as is, no specific styling
+}

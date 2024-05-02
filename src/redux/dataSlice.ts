@@ -1,34 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { JokeStateInterface } from "../types/types";
-import { v4 } from 'uuid';
+import { LaunchStateInterface } from '../types/launches.types';
 
-const initialState: JokeStateInterface = {
-    joke: {
-        "id": v4(),//generate id for joke
-        "title": "",
-        "body": "",
-        "author": "",
-        "views": 0,
-        "createdAt": Date.now().toString(),
+
+const initialState: LaunchStateInterface = {
+    launch: {
+        id: "",
+        mission_name: "",
+        rocket: {
+            rocket_name: ""
+        },
+        launch_site: {
+            site_name: ""
+        },
+        launch_success: undefined,
+        launch_date_local: undefined,
     },
     editingId: "add",
 };
 
-const jokeSlice = createSlice({
-    name: "joke",
+const launchSlice = createSlice({
+    name: "launch",
     initialState,
     reducers: {
-        UPDATE_JOKE: (state, action: PayloadAction<JokeStateInterface>) => {
-            const { joke, editingId } = action.payload;
+        UPDATE_LAUNCH: (state, action: PayloadAction<LaunchStateInterface>) => {
+            const { launch, editingId } = action.payload;
             state.editingId = editingId;
-            state.joke = joke;
+            state.launch = launch;
         },
-        RESET_JOKE: (state) => {
+        RESET_LAUNCH: (state) => {
             state.editingId = initialState.editingId;
-            state.joke = initialState.joke;
+            state.launch = initialState.launch;
         },
-        // wether we are adding a new or editing an old joke
-        UPDATE_EDITING_ID: (state, action: PayloadAction<JokeStateInterface["editingId"]>) => {
+        UPDATE_EDITING_ID: (state, action: PayloadAction<LaunchStateInterface["editingId"]>) => {
             state.editingId = action.payload;
         }
 
@@ -36,10 +39,8 @@ const jokeSlice = createSlice({
 
 });
 
-//make action available for all components
-export const { UPDATE_JOKE, UPDATE_EDITING_ID, RESET_JOKE } = jokeSlice.actions;
-//reducer to store
-export default jokeSlice.reducer;
-//reference to paginaton state
-export const selectJoke = (state: { joke: JokeStateInterface }) => state.joke.joke;
-export const selectEditingId = (state: { joke: JokeStateInterface }) => state.joke.editingId;
+export const { UPDATE_LAUNCH, UPDATE_EDITING_ID, RESET_LAUNCH } = launchSlice.actions;
+export default launchSlice.reducer;
+
+export const selectLaunch = (state: { launch: LaunchStateInterface }) => state.launch.launch;
+export const selectEditingId = (state: { launch: LaunchStateInterface }) => state.launch.editingId;

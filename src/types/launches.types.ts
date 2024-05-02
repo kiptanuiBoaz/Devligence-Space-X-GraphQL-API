@@ -8,7 +8,11 @@ export interface Launch {
         site_name?: string;
     };
     launch_success?: boolean;
-    launch_date_local: Date;
+    launch_date_local?: Date;
+}
+export interface LaunchStateInterface {
+    launch: Launch;
+    editingId: string;
 }
 
 export interface Company {
