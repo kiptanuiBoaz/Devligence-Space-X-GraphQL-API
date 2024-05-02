@@ -2,12 +2,12 @@ import './navbar.scss';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ActionBtn, DangerBtn, MobileMenu, Theme } from '..';
+import { ActionBtn, DangerBtn, MobileMenu, ThemeSelector } from '..';
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai"
 import { useState } from 'react';
 import { RESET_USER, selectTheme } from '../../redux/authSlice';
-import { UPDATE_EDITING_ID } from '../../redux/lauchSlice';
+import { RESET_LAUNCH, UPDATE_EDITING_ID, selectEditingId } from '../../redux/lauchSlice';
 
 export const Navbar = () => {
     const [showMobileNav, setShowMobileNav] = useState<boolean>(false);
@@ -15,7 +15,8 @@ export const Navbar = () => {
 
     //redux store states
     const theme = useSelector(selectTheme);
-
+    const editingId = useSelector(selectEditingId);
+    console.log(editingId)
     //navigation fns
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -33,8 +34,13 @@ export const Navbar = () => {
 
     //handle click event
     const handleClick = () => {
-        dispatch(UPDATE_EDITING_ID("add"))
-        navigate(location.pathname === "/edit" ? "/" : "/edit");
+        dispatch(RESET_LAUNCH());
+        if (location.pathname === "/") {
+            dispatch(UPDATE_EDITING_ID("add"));
+            navigate("/edit");
+        } else {
+            navigate("/");
+        }
     }
 
 
@@ -64,7 +70,7 @@ export const Navbar = () => {
                     <ActionBtn clickHandler={handleClick}>  {location.pathname !== "/edit" ? "Add New Launch" : "Back to Launches"}</ActionBtn>
                     <DangerBtn clickHandler={logOut}>Logout</DangerBtn>
                 </div>
-                <Theme />
+                <ThemeSelector />
             </div>
 
             {/* menu that shows on mobile screen */}

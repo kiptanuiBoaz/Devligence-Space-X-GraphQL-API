@@ -1,0 +1,31 @@
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media only screen and (max-width: 720px) {
+        flex-direction: column;
+    }
+
+    .sort {
+        label {
+            font-size: 1.0rem;
+            font-weight: 500;
+            margin: 0 5px;
+
+            @media only screen and (max-width: 720px) {
+                width: 100%;
+            }
+        }
+
+        select {
+            border: none;
+            outline: none;
+            font-size: 1.0rem;
+            font-weight: 300;
+            padding: 7px;
+            border: 1px solid #777;
+            border-radius: 3px;
+        }
+    }
+}

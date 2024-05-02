@@ -1,7 +1,7 @@
 import './CompanyDetails.scss'; // Import your CSS file
 import { CompanyDeatilsProps } from '../../types/launches.types';
 
-const CompanyDetails = ({ company: { name, summary, headquarters, ceo, coo, cto, launch_sites, vehicles, test_sites } }: CompanyDeatilsProps) => {
+export const CompanyDetails = ({ company: { name, summary, headquarters, ceo, coo, cto, launch_sites, vehicles, test_sites } }: CompanyDeatilsProps) => {
     return (
         <div className="company-details-container">
 
@@ -31,4 +31,4 @@ const CompanyDetails = ({ company: { name, summary, headquarters, ceo, coo, cto,
     );
 };
 
-export default CompanyDetails;
+

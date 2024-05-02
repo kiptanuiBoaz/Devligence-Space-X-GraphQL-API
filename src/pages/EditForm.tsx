@@ -9,6 +9,7 @@ import { RESET_LAUNCH, selectEditingId, selectLaunch, UPDATE_LAUNCH } from "../r
 const EditForm = () => {
     const existingLaunch = useSelector(selectLaunch);
     const editingId = useSelector(selectEditingId);
+    const [rocketName, setRocketName] = useState<string>(existingLaunch.rocket.rocket_name);
     const [launch, setLaunch] = useState({ ...existingLaunch });
 
     const dispatch = useDispatch();
@@ -75,18 +76,18 @@ const EditForm = () => {
                     type="text"
                     id="rocket_name"
                     name="rocket_name"
-                    value={launch.rocket?.rocket_name ?? ""}
-                    onChange={handleInputChange}
+                    value={rocketName}
+                    onChange={(e) => setRocketName(e.target.value)}
                 />
                 <label htmlFor="site_name">Launch Site Name:</label>
                 <input
                     type="text"
                     id="site_name"
                     name="site_name"
-                    value={launch.launch_site?.site_name ?? ""}
+                    value={launch.launch_site?.site_name}
                     onChange={handleInputChange}
                 />
-                <label htmlFor="launch_success">Launch Success:</label>
+                <label htmlFor="launch_success">Launch Success: &nbsp;&nbsp;</label>
                 <select
                     id="launch_success"
                     name="launch_success"

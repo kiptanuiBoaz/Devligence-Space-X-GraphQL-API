@@ -33,16 +33,28 @@ const launchSlice = createSlice({
             const { launch, editingId } = action.payload;
             state.editingId = editingId;
             state.launch = launch;
-            localStorage.setItem('launchState', JSON.stringify(state)); // Update local storage
+            localStorage.setItem('launch', JSON.stringify(state));
         },
         RESET_LAUNCH: (state) => {
             state.editingId = initialState.editingId;
-            state.launch = initialState.launch;
-            localStorage.removeItem('launchState'); // Clear local storage
+            state.launch = {
+                id: "",
+                mission_name: "",
+                rocket: {
+                    rocket_name: ""
+                },
+                launch_site: {
+                    site_name: ""
+                },
+                launch_success: undefined,
+                launch_date_local: undefined,
+            }
+
+            // localStorage.removeItem('launch');
         },
         UPDATE_EDITING_ID: (state, action: PayloadAction<LaunchStateInterface["editingId"]>) => {
             state.editingId = action.payload;
-            localStorage.setItem('launchState', JSON.stringify(state)); // Update local storage
+            localStorage.setItem('launch', JSON.stringify(state));
         }
     }
 });

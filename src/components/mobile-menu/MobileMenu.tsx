@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ActionBtn, DangerBtn, Theme } from '..';
+import { ActionBtn, DangerBtn, ThemeSelector } from '..';
 import "./mobile-menu.scss";
 import { UPDATE_EDITING_ID } from '../../redux/lauchSlice';
 
@@ -28,7 +28,7 @@ export const MobileMenu = () => {
 
     return (
         <div className='menu-items'>
-            <Theme />
+            <ThemeSelector />
             <ActionBtn clickHandler={handleClick}>  {location.pathname !== "/edit" ? "Add New Joke" : "Back to Jokes"}</ActionBtn>
             <DangerBtn clickHandler={logOut}>Logout</DangerBtn>
         </div>

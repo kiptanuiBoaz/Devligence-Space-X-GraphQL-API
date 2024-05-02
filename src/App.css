@@ -9,7 +9,8 @@ body {
   background-color: var(--dark-primary-background-color);
 }
 .dark input,
-textarea {
+textarea,
+.dark select {
   color: #c9c9c9;
   background-color: var(--dark-accent-background-color);
 }
@@ -20,7 +21,8 @@ textarea {
 }
 
 .light input,
-.light textarea {
+.light textarea,
+.light select {
   color: var(--dark-accent-background-color);
   background-color: var(--light-primary-background-color);
 }

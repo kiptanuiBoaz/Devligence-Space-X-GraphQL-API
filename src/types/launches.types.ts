@@ -15,6 +15,10 @@ export interface LaunchStateInterface {
     editingId: string;
 }
 
+export interface LaunchesTablePropInterface {
+    launches: Launch[];
+}
+
 export interface Company {
     ceo: string;
     coo: string;

@@ -7,7 +7,7 @@ import RequireAuth from "./pages/RequireAuth";
 import { useSelector } from "react-redux";
 import { selectTheme } from "./redux/themeSlice";
 import { Layout } from "./Layout";
-const LauchesTable = lazy(() => import("./pages/LauchesTable"));
+const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
 const EditForm = lazy(() => import("./pages/EditForm"));
 
@@ -25,7 +25,7 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             {/* access only to authoenticated users */}
             <Route element={<RequireAuth />} >
-              <Route index element={<LauchesTable />} />
+              <Route index element={<Home />} />
               <Route path="/edit" element={<EditForm />} />
             </Route>
 

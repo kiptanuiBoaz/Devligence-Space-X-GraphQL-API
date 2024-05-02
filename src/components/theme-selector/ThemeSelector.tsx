@@ -1,10 +1,10 @@
 import { BsMoonStarsFill, BsFillSunFill } from "react-icons/bs";
-import "./theme.css";
+import "./theme-selector.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TOGGLE_THEME, selectTheme } from "../../redux/themeSlice";
 
-export const Theme = () => {
+export const ThemeSelector = () => {
     //local reactive state
     const [dark, setDark] = useState(true);
     //global theme refrence
@@ -16,7 +16,7 @@ export const Theme = () => {
     //toggle theme global state
     useEffect(() => {
         dispatch(TOGGLE_THEME({ theme: dark ? "dark" : "light" }));
-    }, [dark])
+    }, [dark, dispatch])
 
     return (
         <div id="darkmode">
