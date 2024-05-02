@@ -6,15 +6,15 @@ import { NAVIGATE_PAGE, selectPagination } from '../../redux/paginationSlice';
 
 
 export const Pagination: React.FC = () => {
-    //show three page numbers
+    // Number of page numbers to show
     const pagesToShow = 3;
-    // pagination state from redux store
+    // Pagination state from redux store
     const { limit, page: currentPage } = useSelector(selectPagination);
-
     const dispatch = useDispatch();
 
+    // Calculate total number of pages
     const totalPages = Math.ceil(30 / limit);
-    //page numbers to display
+    // Array of page numbers to display
     const pageNumbers = Array.from({ length: pagesToShow }, (_, index) => currentPage - 1 + index);
 
     return (
