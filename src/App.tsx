@@ -17,14 +17,12 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
       </div>
-      <h1>{data.company.name}</h1>
+      <p>{data.company.name}</p>
+      <p>{data.company.ceo}</p>
+      <p>{data.company.coo}</p>
+      <p>{data.company.headquarters.city}</p>
       <div className="card">
         <ul>
           {data.launches.map((launch) => (

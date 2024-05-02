@@ -15,7 +15,7 @@ export const Company_And_Launches_Query = gql`
       vehicles
       launch_sites
     }
-    launches(limit:20) {
+    launches(limit:10) {
       id
       mission_name
       rocket {
