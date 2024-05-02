@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import paginationSlice from '../redux/paginatinSlice';
 import jokeSlice from '../redux/dataSlice';
 import themeSlice from '../redux/themeSlice';
 import authSlice from '../redux/authSlice';
+import paginationSlice from '../redux/paginationSlice';
 
 
 const store = configureStore({

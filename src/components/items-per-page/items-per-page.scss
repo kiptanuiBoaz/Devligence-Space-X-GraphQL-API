@@ -1,0 +1,14 @@
+.items-per-page {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    label {
+        margin-right: 5px;
+    }
+
+    select {
+        padding: 5px;
+        border-radius: 4px;
+    }
+}

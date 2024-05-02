@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0px;
+  font-family: var(--global-font-family);
+}
+
+.dark {
+  color: var(--dark-primary-color);
+  background-color: var(--dark-primary-background-color);
+}
+.dark input,
+textarea {
+  color: #c9c9c9;
+  background-color: var(--dark-accent-background-color);
+}
+
+.light {
+  color: var(--light-primary-color);
+  background-color: var(--light-accent-background-color);
+}
+
+.light input,
+.light textarea {
+  color: var(--dark-accent-background-color);
+  background-color: var(--light-primary-background-color);
+}

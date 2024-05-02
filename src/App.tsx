@@ -1,35 +1,47 @@
-import './App.css'
-import { Company_And_Launches_Query } from './graphql/query';
-import { useQuery } from '@apollo/client';
+import { lazy, Suspense } from "react";
+import './App.css';
+import ScrollToTop from "react-scroll-to-top";
+import { Spinner } from "./components";
+import { Route, Routes, Navigate } from "react-router-dom";
+import RequireAuth from "./pages/RequireAuth";
+import { useSelector } from "react-redux";
+import { selectTheme } from "./redux/themeSlice";
+import { Layout } from "./Layout";
+const JokesTable = lazy(() => import("./pages/JokesTable"));
+const Login = lazy(() => import("./pages/Login"));
+const EditForm = lazy(() => import("./pages/EditForm"));
 
+const App = () => {
+  const theme = useSelector(selectTheme);
 
-function App() {
-  //from graphql query
-  const { data, loading, error } = useQuery(Company_And_Launches_Query);
-  console.log(error, "data")
-
-  if (loading) return "Loading...";
-  if (error) return <pre>{error.message}</pre>
 
   return (
-    <>
-      <div>
+    <main className={`${theme}`}>
+      <ScrollToTop style={{ backgroundColor: "#097ea5", zIndex: 7 }} smooth color="#eeeee4" />
 
-      </div>
-      <p>{data.company.name}</p>
-      <p>{data.company.ceo}</p>
-      <p>{data.company.coo}</p>
-      <p>{data.company.headquarters.city}</p>
-      <div className="card">
-        <ul>
-          {data.launches.map((launch) => (
-            <li key={launch.id}>{launch.mission_name}</li>
-          ))}
-        </ul>
-      </div>
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          {/* everything between navbar and footer */}
+          <Route path="/" element={<Layout />}>
+            {/* access only to authoenticated users */}
+            <Route element={<RequireAuth />} >
+              <Route index element={<JokesTable />} />
+              <Route path="/edit" element={<EditForm />} />
+            </Route>
 
-    </>
+          </Route>
+
+          {/* outside navbar and footer */}
+          <Route path="login" element={<Login />} />
+          {/* cath all lost directories and redirect to root */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+    </main>
   )
 }
 
-export default App
+export default App;
+
+
+

@@ -1,0 +1,12 @@
+.danger-btn {
+    padding: 8px 12px;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--secondary-color-hover);
+    }
+}

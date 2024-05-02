@@ -26,4 +26,4 @@ export const { UPDATE_USER, RESET_USER } = authSlice.actions;
 export default authSlice.reducer;
 
 // Reference to loggged in user
-export const selectTheme = (state: { auth: AuthState }) => state.auth.user;
+export const selectTheme = (state: { auth: AuthState }) => state.auth?.user;

@@ -1,0 +1,100 @@
+/* navbar.scss */
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-primary-background-color);
+    padding: 10px 5%;
+    color: white;
+    margin: 0;
+
+    .logo {
+        font-size: 1.5rem;
+        color: var(--secondary-color) !important;
+
+    }
+
+    .mobile-logo-display {
+        display: none;
+
+        @media only screen and (max-width: 720px) {
+            display: flex;
+        }
+    }
+
+    .desktop-logo-display {
+        display: flex;
+
+        @media only screen and (max-width: 720px) {
+            display: none;
+        }
+    }
+
+
+    .menu-icon {
+        cursor: pointer;
+        background-color: var(--dark-accent-background-color);
+        padding: 3px;
+
+        &:hover {
+            color: var(--secondary-color);
+        }
+
+        @media only screen and (min-width: 720px) {
+            display: none;
+        }
+    }
+
+    .mobile-menu {
+        display: absolute !important;
+        flex-direction: column;
+
+        .link-container {
+            flex-direction: column;
+        }
+
+    }
+
+    .nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        @media only screen and (max-width: 720px) {
+            flex-direction: column;
+            display: none;
+        }
+
+
+        .link-container {
+            display: flex;
+            gap: 10px;
+
+            @media only screen and (max-width: 720px) {
+                flex-direction: column;
+            }
+        }
+    }
+
+    .mobile-menu-container {
+        background-color: var(--dark-accent-background-color);
+        border-radius: 4px;
+        padding: 5px 10px 10px 10px;
+        position: absolute;
+        right: 20px;
+        top: 60px;
+
+        @media only screen and (min-width: 720px) {
+            display: none;
+        }
+
+        button {
+            margin: 0 0 5px 0;
+        }
+    }
+}
+
+.dark-nav {
+    background-color: #0f1113;
+}

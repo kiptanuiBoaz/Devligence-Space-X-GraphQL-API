@@ -1,0 +1,54 @@
+/* edit-form.scss */
+.edit-form {
+    padding: 20px 8%;
+    margin: 20px;
+
+    .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    form {
+        label {
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: var(--secondary-color-hover)
+            }
+
+            &+button {
+                margin-left: 10px;
+                background-color: var(--danger-color);
+
+                &:hover {
+                    background-color: var(--danger-hover-color)
+                }
+            }
+        }
+    }
+}

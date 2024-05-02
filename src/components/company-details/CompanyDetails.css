@@ -1,0 +1,35 @@
+.company-details-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.company-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.company-management {
+  flex: 1;
+}
+
+.extra-info {
+  /* margin-top: 20px; */
+}
+
+/* Media query for two columns on desktop and one column on mobile */
+@media (min-width: 768px) {
+  .company-details {
+    flex-direction: row;
+  }
+
+  .company-info,
+  .company-management {
+    width: 50%;
+  }
+}
